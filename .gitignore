@@ -26,6 +26,7 @@ output/
 /real-patients/
 /uploads/
 /exports/
+/data.csv
 *.xlsx
 *.xls
 *.docx
