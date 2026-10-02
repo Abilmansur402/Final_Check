@@ -96,6 +96,34 @@ https://winnie.govtech-kz.com
 
 Do not commit the VPS, SSH, S3, or other infrastructure credentials from `Winnie.pdf`. Keep them only in the deployment environment, and rotate them if they were shared publicly.
 
+If Docker is not available for the `winnie` user, use the non-Docker fallback:
+
+```bash
+cd hack-ccc78aa3-winnie
+
+cd neooutcome-ai-backend
+python3 -m venv .venv
+. .venv/bin/activate
+pip install -r requirements-demo.txt
+nohup python patient_demo.py serve --host 127.0.0.1 --port 8000 > ../backend.log 2>&1 &
+cd ..
+
+cd neooutcome-ai
+npm ci
+VITE_ML_API_URL=/api npm run build
+nohup env PORT=8023 HOST=0.0.0.0 API_BASE_URL=http://127.0.0.1:8000 npm run serve:production > ../frontend.log 2>&1 &
+cd ..
+```
+
+Check the fallback deployment:
+
+```bash
+curl http://localhost:8023
+curl http://localhost:8023/api/health
+tail -n 80 backend.log
+tail -n 80 frontend.log
+```
+
 ### Vercel deployment
 
 Recommended setup:
