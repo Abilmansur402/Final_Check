@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+output/
+.vite/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*credentials*
+*secret*
+
+# Patient data and private exports
+/data/
+/private-data/
+/patient-data/
+/real-patients/
+/uploads/
+/exports/
+*.xlsx
+*.xls
+*.docx
+
+# Keep synthetic demo assets in the repo
+!neooutcome-ai/public/demo/SYN-NICU-0001_bundle.json
+!neooutcome-ai/public/demo/SYN-NICU-0001_features.csv
+!neooutcome-ai/public/demo/SYN-NICU-0001_result.json
+!neooutcome-ai/public/demo/SYN-NICU-0001_patient_card.pdf
+
+# Local caches and backups
+.DS_Store
+Thumbs.db
+.git-history-backups/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

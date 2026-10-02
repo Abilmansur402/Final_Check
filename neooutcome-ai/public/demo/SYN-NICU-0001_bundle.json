@@ -1,0 +1,384 @@
+{
+  "schema_version": "1.0",
+  "synthetic": true,
+  "patient": {
+    "patient_id": "SYN-NICU-0001",
+    "full_name": "Демо-пациент N-0001",
+    "sex": "F",
+    "date_of_birth": "2026-07-12",
+    "gestational_age": "32 недели 4 дня",
+    "birth_weight_g": 1780,
+    "current_weight_g": 1740,
+    "blood_group": "не определена"
+  },
+  "encounter": {
+    "encounter_id": "SYN-HADM-0001",
+    "institution": "NeoOutcome Demonstration NICU",
+    "department": "Отделение реанимации и интенсивной терапии новорождённых",
+    "admitted_at": "2026-07-17T08:15:00+05:00",
+    "prediction_time": "2026-07-17T20:15:00+05:00",
+    "admission_diagnosis": "Респираторный дистресс, динамическое наблюдение",
+    "attending_clinician": "Демо-врач А. Каримова"
+  },
+  "features": {
+    "gender": 0,
+    "age_days_at_admission": 5.0,
+    "hr_mean": 165.0,
+    "hr_min": 130.0,
+    "hr_max": 205.0,
+    "rr_mean": 52.0,
+    "rr_min": 35.0,
+    "rr_max": 78.0,
+    "temp_mean": 36.7,
+    "temp_max": 37.4,
+    "sbp_mean": 52.0,
+    "vitals_count_12h": 96,
+    "ph_mean": 7.21,
+    "ph_min": 7.12,
+    "lactate_mean": 3.8,
+    "lactate_max": 5.2,
+    "po2_mean": 64.0,
+    "po2_min": 48.0,
+    "pco2_mean": 52.0,
+    "base_excess_mean": -6.5,
+    "base_excess_min": -10.0,
+    "glucose_mean": 4.5,
+    "glucose_min": 2.8,
+    "glucose_max": 7.1,
+    "hemoglobin_mean": 145.0,
+    "platelets_min": 155.0,
+    "wbc_mean": 18.0,
+    "wbc_max": 21.0,
+    "sodium_mean": 137.0,
+    "potassium_mean": 4.7,
+    "labs_count_12h": 22
+  },
+  "prediction": {
+    "model_name": "neooutcome_xgb",
+    "model_version": "research-demo-1",
+    "prediction_window_hours": 12,
+    "risk_probability": 0.512658,
+    "risk_percent": 51.3,
+    "operating_threshold": 0.389064,
+    "threshold_crossed": true,
+    "risk_band": "high",
+    "top_factors": [
+      {
+        "feature": "ph_min",
+        "label": "pH, минимум",
+        "value": 7.12,
+        "unit": "",
+        "contribution": 0.41012,
+        "direction": "raises"
+      },
+      {
+        "feature": "base_excess_min",
+        "label": "Base excess, минимум",
+        "value": -10.0,
+        "unit": "ммоль/л",
+        "contribution": 0.31862,
+        "direction": "raises"
+      },
+      {
+        "feature": "base_excess_mean",
+        "label": "Base excess, среднее",
+        "value": -6.5,
+        "unit": "ммоль/л",
+        "contribution": 0.27937,
+        "direction": "raises"
+      },
+      {
+        "feature": "lactate_max",
+        "label": "Лактат, максимум",
+        "value": 5.2,
+        "unit": "ммоль/л",
+        "contribution": -0.17187,
+        "direction": "lowers"
+      },
+      {
+        "feature": "ph_mean",
+        "label": "pH, среднее",
+        "value": 7.21,
+        "unit": "",
+        "contribution": 0.16446,
+        "direction": "raises"
+      },
+      {
+        "feature": "glucose_min",
+        "label": "Глюкоза, минимум",
+        "value": 2.8,
+        "unit": "ммоль/л",
+        "contribution": 0.14341,
+        "direction": "raises"
+      }
+    ],
+    "shap_values": [
+      {
+        "feature": "ph_min",
+        "label": "pH, минимум",
+        "value": 7.12,
+        "unit": "",
+        "contribution": 0.41012,
+        "direction": "raises"
+      },
+      {
+        "feature": "base_excess_min",
+        "label": "Base excess, минимум",
+        "value": -10.0,
+        "unit": "ммоль/л",
+        "contribution": 0.31862,
+        "direction": "raises"
+      },
+      {
+        "feature": "base_excess_mean",
+        "label": "Base excess, среднее",
+        "value": -6.5,
+        "unit": "ммоль/л",
+        "contribution": 0.27937,
+        "direction": "raises"
+      },
+      {
+        "feature": "lactate_max",
+        "label": "Лактат, максимум",
+        "value": 5.2,
+        "unit": "ммоль/л",
+        "contribution": -0.17187,
+        "direction": "lowers"
+      },
+      {
+        "feature": "ph_mean",
+        "label": "pH, среднее",
+        "value": 7.21,
+        "unit": "",
+        "contribution": 0.16446,
+        "direction": "raises"
+      },
+      {
+        "feature": "glucose_min",
+        "label": "Глюкоза, минимум",
+        "value": 2.8,
+        "unit": "ммоль/л",
+        "contribution": 0.14341,
+        "direction": "raises"
+      },
+      {
+        "feature": "lactate_mean",
+        "label": "Лактат, среднее",
+        "value": 3.8,
+        "unit": "ммоль/л",
+        "contribution": -0.12206,
+        "direction": "lowers"
+      },
+      {
+        "feature": "rr_min",
+        "label": "ЧДД, минимум",
+        "value": 35.0,
+        "unit": "вдох/мин",
+        "contribution": 0.11522,
+        "direction": "raises"
+      },
+      {
+        "feature": "sbp_mean",
+        "label": "Систолическое АД, среднее",
+        "value": 52.0,
+        "unit": "мм рт. ст.",
+        "contribution": -0.11376,
+        "direction": "lowers"
+      },
+      {
+        "feature": "platelets_min",
+        "label": "Тромбоциты, минимум",
+        "value": 155.0,
+        "unit": "10^9/л",
+        "contribution": 0.09642,
+        "direction": "raises"
+      },
+      {
+        "feature": "hr_min",
+        "label": "ЧСС, минимум",
+        "value": 130.0,
+        "unit": "уд/мин",
+        "contribution": -0.09492,
+        "direction": "lowers"
+      },
+      {
+        "feature": "rr_mean",
+        "label": "ЧДД, среднее",
+        "value": 52.0,
+        "unit": "вдох/мин",
+        "contribution": -0.07787,
+        "direction": "lowers"
+      },
+      {
+        "feature": "sodium_mean",
+        "label": "Натрий, средний",
+        "value": 137.0,
+        "unit": "ммоль/л",
+        "contribution": -0.07726,
+        "direction": "lowers"
+      },
+      {
+        "feature": "hr_mean",
+        "label": "ЧСС, среднее",
+        "value": 165.0,
+        "unit": "уд/мин",
+        "contribution": -0.06455,
+        "direction": "lowers"
+      },
+      {
+        "feature": "age_days_at_admission",
+        "label": "Возраст при поступлении",
+        "value": 5.0,
+        "unit": "дней",
+        "contribution": 0.05624,
+        "direction": "raises"
+      },
+      {
+        "feature": "hemoglobin_mean",
+        "label": "Гемоглобин, средний",
+        "value": 145.0,
+        "unit": "г/л",
+        "contribution": -0.05417,
+        "direction": "lowers"
+      },
+      {
+        "feature": "hr_max",
+        "label": "ЧСС, максимум",
+        "value": 205.0,
+        "unit": "уд/мин",
+        "contribution": 0.0474,
+        "direction": "raises"
+      },
+      {
+        "feature": "temp_max",
+        "label": "Температура, максимум",
+        "value": 37.4,
+        "unit": "°C",
+        "contribution": -0.04049,
+        "direction": "lowers"
+      },
+      {
+        "feature": "wbc_max",
+        "label": "Лейкоциты, максимум",
+        "value": 21.0,
+        "unit": "10^9/л",
+        "contribution": -0.03507,
+        "direction": "lowers"
+      },
+      {
+        "feature": "labs_count_12h",
+        "label": "Лабораторных измерений",
+        "value": 22.0,
+        "unit": "измерений",
+        "contribution": -0.03458,
+        "direction": "lowers"
+      },
+      {
+        "feature": "temp_mean",
+        "label": "Температура, средняя",
+        "value": 36.7,
+        "unit": "°C",
+        "contribution": -0.02976,
+        "direction": "lowers"
+      },
+      {
+        "feature": "vitals_count_12h",
+        "label": "Измерений витальных показателей",
+        "value": 96.0,
+        "unit": "измерений",
+        "contribution": 0.025,
+        "direction": "raises"
+      },
+      {
+        "feature": "po2_mean",
+        "label": "pO2, среднее",
+        "value": 64.0,
+        "unit": "мм рт. ст.",
+        "contribution": -0.02481,
+        "direction": "lowers"
+      },
+      {
+        "feature": "wbc_mean",
+        "label": "Лейкоциты, среднее",
+        "value": 18.0,
+        "unit": "10^9/л",
+        "contribution": -0.01813,
+        "direction": "lowers"
+      },
+      {
+        "feature": "po2_min",
+        "label": "pO2, минимум",
+        "value": 48.0,
+        "unit": "мм рт. ст.",
+        "contribution": -0.01547,
+        "direction": "lowers"
+      },
+      {
+        "feature": "glucose_mean",
+        "label": "Глюкоза, средняя",
+        "value": 4.5,
+        "unit": "ммоль/л",
+        "contribution": -0.01544,
+        "direction": "lowers"
+      },
+      {
+        "feature": "glucose_max",
+        "label": "Глюкоза, максимум",
+        "value": 7.1,
+        "unit": "ммоль/л",
+        "contribution": 0.01238,
+        "direction": "raises"
+      },
+      {
+        "feature": "pco2_mean",
+        "label": "pCO2, среднее",
+        "value": 52.0,
+        "unit": "мм рт. ст.",
+        "contribution": -0.00433,
+        "direction": "lowers"
+      },
+      {
+        "feature": "rr_max",
+        "label": "ЧДД, максимум",
+        "value": 78.0,
+        "unit": "вдох/мин",
+        "contribution": 0.00387,
+        "direction": "raises"
+      },
+      {
+        "feature": "potassium_mean",
+        "label": "Калий, средний",
+        "value": 4.7,
+        "unit": "ммоль/л",
+        "contribution": 0.00059,
+        "direction": "raises"
+      },
+      {
+        "feature": "gender",
+        "label": "Пол (модель: M=1, F=0)",
+        "value": 0.0,
+        "unit": "код",
+        "contribution": 0.0,
+        "direction": "raises"
+      }
+    ],
+    "shap_method": "XGBoost TreeSHAP через pred_contribs в пространстве log-odds",
+    "shap_feature_count": 31,
+    "shap_base_value": -0.627938,
+    "shap_base_probability": 0.347978,
+    "shap_contribution_sum": 0.67858,
+    "shap_margin": 0.050643,
+    "shap_probability": 0.512658,
+    "review_actions": [
+      "Сверить загруженные значения с первичной медицинской документацией.",
+      "Передать оценку старшему врачу для приоритетного клинического осмотра по локальному протоколу.",
+      "Продолжить непрерывный мониторинг и задокументировать повторную оценку состояния.",
+      "Повторно проверить газовый состав крови и кислотно-основное состояние.",
+      "Проверить динамику лактата и сопоставить её с клиническими признаками перфузии.",
+      "Повторно измерить глюкозу и оценить динамику по локальному протоколу.",
+      "Проверить эпизоды тахикардии по исходной записи мониторинга."
+    ],
+    "disclaimer": "Синтетические данные. Исследовательский прототип. Не является диагнозом или медицинской рекомендацией.",
+    "generated_at": "2026-07-17T18:17:37.422918+00:00"
+  }
+}

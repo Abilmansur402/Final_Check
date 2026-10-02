@@ -1,0 +1,2 @@
+gender,age_days_at_admission,hr_mean,hr_min,hr_max,rr_mean,rr_min,rr_max,temp_mean,temp_max,sbp_mean,vitals_count_12h,ph_mean,ph_min,lactate_mean,lactate_max,po2_mean,po2_min,pco2_mean,base_excess_mean,base_excess_min,glucose_mean,glucose_min,glucose_max,hemoglobin_mean,platelets_min,wbc_mean,wbc_max,sodium_mean,potassium_mean,labs_count_12h
+0,5.0,165.0,130.0,205.0,52.0,35.0,78.0,36.7,37.4,52.0,96,7.21,7.12,3.8,5.2,64.0,48.0,52.0,-6.5,-10.0,4.5,2.8,7.1,145.0,155.0,18.0,21.0,137.0,4.7,22
