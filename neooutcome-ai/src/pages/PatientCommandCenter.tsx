@@ -31,7 +31,7 @@ export function PatientCommandCenter() {
   }
 
   return (
-    <div className="grid gap-6 xl:grid-cols-[240px_1fr_300px]">
+    <div className="grid gap-6 xl:grid-cols-[264px_minmax(0,1fr)_300px]">
       {/* Patient roster */}
       <aside className="space-y-2">
         <p className="px-1 text-xs font-medium uppercase text-muted-foreground">
@@ -50,7 +50,7 @@ export function PatientCommandCenter() {
       {/* Main column: gauge + explainability */}
       <div className="space-y-6">
         <Card>
-          <CardHeader className="flex-row items-start justify-between space-y-0">
+          <CardHeader className="flex-row items-start justify-between gap-4 space-y-0">
             <div>
               <CardTitle className="text-xl">{patient.name}</CardTitle>
               <CardDescription>
@@ -59,7 +59,7 @@ export function PatientCommandCenter() {
             </div>
             <FlagForReview patient={patient} />
           </CardHeader>
-          <CardContent className="grid gap-6 md:grid-cols-[240px_1fr] md:items-center">
+          <CardContent className="grid gap-6 md:grid-cols-[240px_minmax(0,1fr)] md:items-center xl:grid-cols-1 2xl:grid-cols-[240px_minmax(0,1fr)]">
             <RiskGauge score={patient.riskScore} baseline={patient.baselineRisk} />
             <div className="space-y-3">
               <RiskIndicator

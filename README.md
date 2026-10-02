@@ -53,6 +53,23 @@ Open the protected intake workflow at:
 http://127.0.0.1:5173/intake
 ```
 
+## Admission model (Asfendiyarov data)
+
+A second model predicts in-hospital death from maternal and birth data available at NICU admission. It is trained on the de-identified Asfendiyarov dataset (`neooutcome-ai-backend/data/asfendiyarov_deidentified.csv`, 1105 newborns, 2021–2025).
+
+- Target: `death = 1 - event` (in the source file `event = 1` is survived/discharged, `event = 0` is death).
+- Features: 15 maternal and birth variables. In-hospital complications (`oc_*`) and in-stay diagnoses are excluded to avoid leakage.
+- Validation: temporal. Train 2021–2023, test 2024–2025. Test AUROC 0.82 (95% CI 0.77–0.87); alert threshold set for 80% sensitivity on 2023.
+
+Retrain and write the metrics report to `output/asfendiyarov_metrics.json`:
+
+```powershell
+cd neooutcome-ai-backend
+python train_asfendiyarov.py
+```
+
+The API serves it at `POST /predict/admission`, and the Intake page shows it in the "Оценка при поступлении" card.
+
 ## GitHub upload
 
 From this folder:

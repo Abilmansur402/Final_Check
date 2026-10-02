@@ -35,6 +35,7 @@ from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
+from admission_model import DEFAULT_ADMISSION_MODEL, AdmissionEngine
 from reportlab.platypus import (
     KeepTogether,
     Paragraph,
@@ -709,6 +710,7 @@ def generate_bundle(
 
 class ApiHandler(BaseHTTPRequestHandler):
     engine: ModelEngine
+    admission_engine: AdmissionEngine | None = None
 
     def _headers(self, status: int = 200) -> None:
         self.send_response(status)
@@ -732,6 +734,7 @@ class ApiHandler(BaseHTTPRequestHandler):
                     "status": "ok",
                     "model": "neooutcome_xgb",
                     "features": len(self.engine.features),
+                    "admission_model": self.admission_engine is not None,
                     "clinical_use": False,
                 }
             )
@@ -744,8 +747,14 @@ class ApiHandler(BaseHTTPRequestHandler):
         self._json({"error": "Not found"}, 404)
 
     def do_POST(self) -> None:  # noqa: N802
-        if self.path != "/predict":
+        if self.path not in ("/predict", "/predict/admission"):
             self._json({"error": "Not found"}, 404)
+            return
+        if self.path == "/predict/admission" and self.admission_engine is None:
+            self._json(
+                {"error": "Модель при поступлении не загружена. Запустите: python train_asfendiyarov.py"},
+                503,
+            )
             return
         try:
             length = int(self.headers.get("Content-Length", "0"))
@@ -755,7 +764,10 @@ class ApiHandler(BaseHTTPRequestHandler):
             features = payload.get("features", payload)
             if not isinstance(features, dict):
                 raise ValueError("Ожидается JSON-объект features")
-            self._json(self.engine.predict(features))
+            if self.path == "/predict/admission":
+                self._json(self.admission_engine.predict(features))
+            else:
+                self._json(self.engine.predict(features))
         except (ValueError, json.JSONDecodeError) as exc:
             self._json({"error": str(exc)}, 400)
         except Exception as exc:  # pragma: no cover - boundary safety
@@ -765,12 +777,19 @@ class ApiHandler(BaseHTTPRequestHandler):
         sys.stdout.write("[neooutcome-api] " + (format_string % args) + "\n")
 
 
-def serve(model_path: Path, host: str, port: int) -> None:
+def serve(model_path: Path, host: str, port: int, admission_model: Path = DEFAULT_ADMISSION_MODEL) -> None:
     engine = ModelEngine(model_path)
-    handler = type("NeoOutcomeApiHandler", (ApiHandler,), {"engine": engine})
+    admission_engine = AdmissionEngine(admission_model) if admission_model.exists() else None
+    if admission_engine is None:
+        print(f"Admission model not found ({admission_model}); run train_asfendiyarov.py to enable it")
+    handler = type(
+        "NeoOutcomeApiHandler",
+        (ApiHandler,),
+        {"engine": engine, "admission_engine": admission_engine},
+    )
     server = ThreadingHTTPServer((host, port), handler)
     print(f"NeoOutcome demo API: http://{host}:{port}")
-    print("Endpoints: GET /health, GET /demo, POST /predict")
+    print("Endpoints: GET /health, GET /demo, POST /predict, POST /predict/admission")
     print(SYNTHETIC_NOTICE)
     try:
         server.serve_forever()
@@ -798,6 +817,7 @@ def build_parser() -> argparse.ArgumentParser:
     serve_parser = subparsers.add_parser("serve", help="Run the local model inference API")
     serve_parser.add_argument("--host", default="127.0.0.1")
     serve_parser.add_argument("--port", type=int, default=8000)
+    serve_parser.add_argument("--admission-model", type=Path, default=DEFAULT_ADMISSION_MODEL)
     return parser
 
 
@@ -811,7 +831,7 @@ def main() -> int:
             print(f"{label}: {path}")
         return 0
     if args.command == "serve":
-        serve(args.model, args.host, args.port)
+        serve(args.model, args.host, args.port, args.admission_model)
         return 0
     return 2
 

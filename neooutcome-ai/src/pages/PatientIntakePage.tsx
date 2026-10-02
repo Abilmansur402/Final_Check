@@ -17,6 +17,7 @@ import {
 import { useAuth } from '@/auth/AuthProvider'
 import { Badge } from '@/components/ui/badge'
 import { SHAPDecisionPanel } from '@/components/patient/SHAPDecisionPanel'
+import { AdmissionRiskCard } from '@/components/patient/AdmissionRiskCard'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -635,6 +636,8 @@ export function PatientIntakePage() {
           </div>
         )}
       </section>
+
+      <AdmissionRiskCard />
 
       {bundle && prediction && (
         <section className="flex flex-col gap-4 rounded-md border bg-card p-4 md:flex-row md:items-center md:justify-between">

@@ -1,27 +1,24 @@
-import { Link } from 'react-router-dom'
-import { Baby, ChevronRight } from 'lucide-react'
-import type { Patient, PatientStatus } from '@/types'
-import { Badge } from '@/components/ui/badge'
-import { RiskIndicator } from './RiskIndicator'
-import { cn } from '@/lib/utils'
+import { Link } from "react-router-dom";
+import { Baby, ChevronRight } from "lucide-react";
+import type { Patient, PatientStatus } from "@/types";
+import { Badge } from "@/components/ui/badge";
+import { RiskIndicator } from "./RiskIndicator";
+import { cn } from "@/lib/utils";
 
-const STATUS: Record<
-  PatientStatus,
-  { label: string; className: string }
-> = {
-  stable: { label: 'Stable', className: 'bg-risk-low/15 text-risk-low' },
+const STATUS: Record<PatientStatus, { label: string; className: string }> = {
+  stable: { label: "Stable", className: "bg-risk-low/15 text-risk-low" },
   watch: {
-    label: 'Watch',
-    className: 'bg-risk-moderate/15 text-risk-moderate',
+    label: "Watch",
+    className: "bg-risk-moderate/15 text-risk-moderate",
   },
-  critical: { label: 'Critical', className: 'bg-risk-high/15 text-risk-high' },
-}
+  critical: { label: "Critical", className: "bg-risk-high/15 text-risk-high" },
+};
 
 interface PatientCardProps {
-  patient: Patient
-  selected?: boolean
-  onSelect?: (id: string) => void
-  href?: string
+  patient: Patient;
+  selected?: boolean;
+  onSelect?: (id: string) => void;
+  href?: string;
 }
 
 export function PatientCard({
@@ -30,16 +27,16 @@ export function PatientCard({
   onSelect,
   href,
 }: PatientCardProps) {
-  const status = STATUS[patient.status]
+  const status = STATUS[patient.status];
 
   const body = (
     <div
       className={cn(
-        'grid grid-cols-[40px_minmax(0,1fr)] gap-3 rounded-lg border bg-card p-3 text-left transition-all hover:border-primary/40 hover:shadow-sm sm:grid-cols-[40px_minmax(0,1fr)_auto]',
-        selected && 'border-primary/60 ring-1 ring-primary/30',
+        "grid grid-cols-[40px_minmax(0,1fr)] items-center gap-x-3 gap-y-2.5 rounded-lg border bg-card p-3 text-left transition-all hover:border-primary/40 hover:shadow-sm",
+        selected && "border-primary/60 ring-1 ring-primary/30",
       )}
     >
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center self-center rounded-full bg-accent text-accent-foreground">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground">
         <Baby className="h-5 w-5" />
       </div>
       <div className="min-w-0 flex-1">
@@ -47,7 +44,7 @@ export function PatientCard({
           <p className="truncate text-sm font-semibold">{patient.name}</p>
           <Badge
             variant="secondary"
-            className={cn('shrink-0', status.className)}
+            className={cn("shrink-0", status.className)}
           >
             {status.label}
           </Badge>
@@ -55,32 +52,45 @@ export function PatientCard({
         <p className="truncate text-xs text-muted-foreground">
           {patient.id} · {patient.bed}
         </p>
-        <p className="mt-1 flex flex-wrap gap-x-2 gap-y-1 text-xs text-muted-foreground">
-          <span className="whitespace-nowrap tabular-nums">{patient.gestationalAgeWeeks} wks</span>
+        <p className="mt-0.5 flex flex-wrap gap-x-1.5 text-xs leading-5 text-muted-foreground">
+          <span className="whitespace-nowrap tabular-nums">
+            {patient.gestationalAgeWeeks} wks
+          </span>
           <span aria-hidden="true">·</span>
-          <span className="whitespace-nowrap tabular-nums">{patient.birthWeightGrams} g</span>
+          <span className="whitespace-nowrap tabular-nums">
+            {patient.birthWeightGrams} g
+          </span>
           <span aria-hidden="true">·</span>
-          <span className="whitespace-nowrap tabular-nums">DOL {patient.dayOfLife}</span>
+          <span className="whitespace-nowrap tabular-nums">
+            DOL {patient.dayOfLife}
+          </span>
         </p>
       </div>
-      <div className="col-span-2 flex items-center justify-end gap-2 sm:col-span-1 sm:self-center">
-        <RiskIndicator score={patient.riskScore} delta={patient.riskDelta} size="sm" />
-        {href && <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />}
+      <div className="col-span-2 flex items-center gap-2">
+        <RiskIndicator
+          score={patient.riskScore}
+          delta={patient.riskDelta}
+          size="sm"
+          className="flex-1 justify-between"
+        />
+        {href && (
+          <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />
+        )}
       </div>
     </div>
-  )
+  );
 
   if (href) {
     return (
       <Link to={href} className="block">
         {body}
       </Link>
-    )
+    );
   }
 
   return (
     <button className="block w-full" onClick={() => onSelect?.(patient.id)}>
       {body}
     </button>
-  )
+  );
 }
