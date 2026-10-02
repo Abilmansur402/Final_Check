@@ -40,29 +40,29 @@ export function WelcomeDashboard() {
       <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard
           icon={Users}
-          label="Active patients"
+          label="Пациентов в отделении"
           value={String(patients.length)}
-          hint="NICU Level III"
+          hint="ОРИТН III уровня"
         />
         <StatCard
           icon={AlertTriangle}
-          label="Critical status"
+          label="В критическом состоянии"
           value={String(critical)}
-          hint="Require close monitoring"
+          hint="Требуют пристального наблюдения"
           accentClass="text-risk-high bg-risk-high/10"
         />
         <StatCard
           icon={Activity}
-          label="Mean 24h risk"
+          label="Средний риск на 24 ч"
           value={`${avgRisk}%`}
-          hint="Across active ward"
+          hint="По всему отделению"
           accentClass="text-risk-moderate bg-risk-moderate/10"
         />
         <StatCard
           icon={ClipboardList}
-          label="Review queue"
+          label="Очередь проверки"
           value="3"
-          hint="Pending clinician review"
+          hint="Ожидают осмотра врача"
           accentClass="text-primary bg-primary/10"
         />
       </section>
@@ -70,28 +70,24 @@ export function WelcomeDashboard() {
       <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
         <Card>
           <CardHeader>
-            <CardTitle>Active patients — by risk</CardTitle>
+            <CardTitle>Пациенты по уровню риска</CardTitle>
             <CardDescription>
-              Highest predicted 24h adverse-outcome risk first. Select a patient
-              to open the Command Center.
+              Сначала пациенты с самым высоким риском на 24 ч. Нажмите на
+              пациента, чтобы открыть его карточку.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
             {sorted.map((p) => (
-              <PatientCard
-                key={p.id}
-                patient={p}
-                href={`/patient/${p.id}`}
-              />
+              <PatientCard key={p.id} patient={p} href={`/patient/${p.id}`} />
             ))}
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader>
-            <CardTitle>Ward risk distribution</CardTitle>
+            <CardTitle>Распределение риска в отделении</CardTitle>
             <CardDescription>
-              Non-alarming gradient — mint to coral.
+              Прогнозируемый риск неблагоприятного исхода на 24 ч, %.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -110,6 +106,8 @@ export function WelcomeDashboard() {
                   />
                   <Tooltip
                     cursor={{ fill: 'hsl(var(--muted))' }}
+                    formatter={(value) => [`${value}%`, 'Риск']}
+                    labelFormatter={(label) => `Пациент ${label}`}
                     contentStyle={{
                       background: 'hsl(var(--popover))',
                       border: '1px solid hsl(var(--border))',

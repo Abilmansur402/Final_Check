@@ -26,9 +26,9 @@ export const DOCTOR_ACCOUNTS: DoctorAccount[] = [
     email: 'doctor.karimova@neooutcome.demo',
     doctorId: 'KZ-NICU-001',
     password: 'NeoDemo2026!',
-    name: 'Dr. A. Karimova',
-    role: 'NICU physician',
-    institution: 'National Research Center for Maternal & Child Health',
+    name: 'Д-р А. Каримова',
+    role: 'Врач-неонатолог ОРИТН',
+    institution: 'Национальный научный центр материнства и детства',
     region: 'г. Астана',
   },
   {
@@ -36,9 +36,9 @@ export const DOCTOR_ACCOUNTS: DoctorAccount[] = [
     email: 'doctor.sadykov@neooutcome.demo',
     doctorId: 'KZ-NICU-002',
     password: 'NeoDemo2026!',
-    name: 'Dr. M. Sadykov',
-    role: 'Regional neonatologist',
-    institution: 'Kazakhstan neonatal care network',
+    name: 'Д-р М. Садыков',
+    role: 'Региональный неонатолог',
+    institution: 'Неонатальная служба Казахстана',
     region: 'Кызылординская',
   },
 ]
@@ -52,10 +52,15 @@ export function findDoctorAccount(login: string, doctorId: string) {
 }
 
 export function findDoctorByEmail(email: string) {
-  return DOCTOR_ACCOUNTS.find((candidate) => candidate.email.toLowerCase() === email.toLowerCase())
+  return DOCTOR_ACCOUNTS.find(
+    (candidate) => candidate.email.toLowerCase() === email.toLowerCase(),
+  )
 }
 
-export function toDoctorSession(account: DoctorAccount, authUserId?: string): DoctorSession {
+export function toDoctorSession(
+  account: DoctorAccount,
+  authUserId?: string,
+): DoctorSession {
   return {
     login: account.login,
     email: account.email,

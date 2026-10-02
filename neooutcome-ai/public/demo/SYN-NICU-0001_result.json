@@ -18,7 +18,7 @@
     },
     {
       "feature": "base_excess_min",
-      "label": "Base excess, минимум",
+      "label": "Избыток оснований (BE), минимум",
       "value": -10.0,
       "unit": "ммоль/л",
       "contribution": 0.31862,
@@ -26,7 +26,7 @@
     },
     {
       "feature": "base_excess_mean",
-      "label": "Base excess, среднее",
+      "label": "Избыток оснований (BE), среднее",
       "value": -6.5,
       "unit": "ммоль/л",
       "contribution": 0.27937,
@@ -68,7 +68,7 @@
     },
     {
       "feature": "base_excess_min",
-      "label": "Base excess, минимум",
+      "label": "Избыток оснований (BE), минимум",
       "value": -10.0,
       "unit": "ммоль/л",
       "contribution": 0.31862,
@@ -76,7 +76,7 @@
     },
     {
       "feature": "base_excess_mean",
-      "label": "Base excess, среднее",
+      "label": "Избыток оснований (BE), среднее",
       "value": -6.5,
       "unit": "ммоль/л",
       "contribution": 0.27937,

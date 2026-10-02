@@ -28,10 +28,10 @@ export function RegionMultiSelect({
 
   const label =
     selected.length === 0
-      ? 'All regions'
+      ? 'Все регионы'
       : selected.length === options.length
-        ? 'All regions'
-        : `${selected.length} region${selected.length > 1 ? 's' : ''}`
+        ? 'Все регионы'
+        : `Выбрано регионов: ${selected.length}`
 
   return (
     <Popover>
@@ -44,13 +44,13 @@ export function RegionMultiSelect({
       <PopoverContent align="start" className="w-56 p-2">
         <div className="mb-1 flex items-center justify-between px-1">
           <span className="text-xs font-medium text-muted-foreground">
-            Regions
+            Регионы
           </span>
           <button
             className="text-xs text-primary hover:underline"
             onClick={() => onChange([])}
           >
-            Clear
+            Сбросить
           </button>
         </div>
         <div className="space-y-0.5">

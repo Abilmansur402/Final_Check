@@ -9,24 +9,24 @@ import { useAuth } from '@/auth/AuthProvider'
 
 const TITLES: Record<string, { title: string; subtitle: string }> = {
   '/': {
-    title: 'Welcome Dashboard',
-    subtitle: 'Active NICU status at a glance',
+    title: 'Главная панель',
+    subtitle: 'Состояние отделения реанимации новорождённых',
   },
   '/patient': {
-    title: 'NICU Patient Command Center',
-    subtitle: 'Individual 24-hour outcome prediction',
+    title: 'Пациенты ОРИТН',
+    subtitle: 'Индивидуальный прогноз исхода на 24 часа',
   },
   '/intake': {
-    title: 'Patient Intake & ML Review',
-    subtitle: 'Synthetic patient documents, model inference and follow-up review',
+    title: 'Приём пациента и ML-оценка',
+    subtitle: 'Данные пациента, расчёт риска моделью и повторный осмотр',
   },
   '/regional': {
-    title: 'Regional Insight Dashboard',
-    subtitle: 'Kazakhstan AshyqData mortality and capacity layer',
+    title: 'Региональная аналитика',
+    subtitle: 'Смертность и ресурсы здравоохранения по данным AshyqData',
   },
   '/regional-map': {
-    title: 'Interactive Kazakhstan Map',
-    subtitle: 'Regional mortality and healthcare capacity hotspots',
+    title: 'Интерактивная карта Казахстана',
+    subtitle: 'Регионы с высокой смертностью и нагрузкой на здравоохранение',
   },
 }
 
@@ -87,7 +87,7 @@ export function DashboardContainer() {
                 variant="ghost"
                 size="icon"
                 onClick={toggle}
-                aria-label="Toggle color theme"
+                aria-label="Сменить тему"
               >
                 {dark ? (
                   <Sun className="h-4 w-4" />
@@ -99,7 +99,7 @@ export function DashboardContainer() {
                 variant="ghost"
                 size="icon"
                 onClick={handleLogout}
-                aria-label="Sign out"
+                aria-label="Выйти"
               >
                 <LogOut className="h-4 w-4" />
               </Button>

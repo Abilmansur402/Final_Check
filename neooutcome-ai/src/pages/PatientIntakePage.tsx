@@ -69,8 +69,8 @@ const FEATURE_LABELS: Partial<Record<(typeof MODEL_FEATURES)[number], string>> =
   po2_mean: 'pO2, среднее',
   po2_min: 'pO2, минимум',
   pco2_mean: 'pCO2, среднее',
-  base_excess_mean: 'Base excess, среднее',
-  base_excess_min: 'Base excess, минимум',
+  base_excess_mean: 'Избыток оснований (BE), среднее',
+  base_excess_min: 'Избыток оснований (BE), минимум',
   glucose_mean: 'Глюкоза, средняя',
   glucose_min: 'Глюкоза, минимум',
   glucose_max: 'Глюкоза, максимум',
@@ -123,7 +123,7 @@ export function PatientIntakePage() {
   const [apiStatus, setApiStatus] = React.useState<'checking' | 'online' | 'offline'>('checking')
   const [appointmentOpen, setAppointmentOpen] = React.useState(false)
   const [appointmentTime, setAppointmentTime] = React.useState(defaultAppointmentTime)
-  const [appointmentType, setAppointmentType] = React.useState('Повторный осмотр NICU')
+  const [appointmentType, setAppointmentType] = React.useState('Повторный осмотр в ОРИТН')
   const [appointmentReason, setAppointmentReason] = React.useState('Проверка состояния после ML-оценки риска')
   const [appointment, setAppointment] = React.useState<Appointment | null>(null)
   const [isSavingAppointment, setIsSavingAppointment] = React.useState(false)
@@ -400,7 +400,7 @@ export function PatientIntakePage() {
                 <Database className="h-4 w-4" />
               </div>
               <div className="min-w-0">
-                <h3 className="text-sm font-semibold">Asfendiyarov University dataset</h3>
+                <h3 className="text-sm font-semibold">Датасет КазНМУ им. Асфендиярова</h3>
                 <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
                   Обезличенный исследовательский набор клинических числовых признаков,
                   предоставленный для хакатона. Используется для демонстрации агрегированного
@@ -410,16 +410,16 @@ export function PatientIntakePage() {
             </div>
             <dl className="mt-4 grid grid-cols-3 gap-2 text-center text-xs">
               <div className="rounded-md bg-muted/50 px-2 py-2">
-                <dt className="text-muted-foreground">Rows</dt>
-                <dd className="mt-1 font-semibold tabular-nums">1,105</dd>
+                <dt className="text-muted-foreground">Записей</dt>
+                <dd className="mt-1 font-semibold tabular-nums">1 105</dd>
               </div>
               <div className="rounded-md bg-muted/50 px-2 py-2">
-                <dt className="text-muted-foreground">Features</dt>
+                <dt className="text-muted-foreground">Признаков</dt>
                 <dd className="mt-1 font-semibold tabular-nums">26</dd>
               </div>
               <div className="rounded-md bg-muted/50 px-2 py-2">
-                <dt className="text-muted-foreground">IDs</dt>
-                <dd className="mt-1 font-semibold">Removed</dd>
+                <dt className="text-muted-foreground">Идентификаторы</dt>
+                <dd className="mt-1 font-semibold">Удалены</dd>
               </div>
             </dl>
           </div>
@@ -695,7 +695,7 @@ export function PatientIntakePage() {
                 onChange={(event) => setAppointmentType(event.target.value)}
                 className="h-10 rounded-md border bg-background px-3"
               >
-                <option>Повторный осмотр NICU</option>
+                <option>Повторный осмотр в ОРИТН</option>
                 <option>Консилиум старшего врача</option>
                 <option>Контроль после новых анализов</option>
               </select>

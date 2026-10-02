@@ -35,7 +35,7 @@ export function PatientCommandCenter() {
       {/* Patient roster */}
       <aside className="space-y-2">
         <p className="px-1 text-xs font-medium uppercase text-muted-foreground">
-          NICU roster
+          Пациенты отделения
         </p>
         {patients.map((p) => (
           <PatientCard
@@ -54,23 +54,26 @@ export function PatientCommandCenter() {
             <div>
               <CardTitle className="text-xl">{patient.name}</CardTitle>
               <CardDescription>
-                {patient.id} · {patient.bed} · updated {patient.lastUpdated}
+                {patient.id} · {patient.bed} · обновлено {patient.lastUpdated}
               </CardDescription>
             </div>
             <FlagForReview patient={patient} />
           </CardHeader>
           <CardContent className="grid gap-6 md:grid-cols-[240px_minmax(0,1fr)] md:items-center xl:grid-cols-1 2xl:grid-cols-[240px_minmax(0,1fr)]">
-            <RiskGauge score={patient.riskScore} baseline={patient.baselineRisk} />
+            <RiskGauge
+              score={patient.riskScore}
+              baseline={patient.baselineRisk}
+            />
             <div className="space-y-3">
               <RiskIndicator
                 score={patient.riskScore}
                 delta={patient.riskDelta}
               />
               <p className="text-sm text-muted-foreground">
-                The Outcome Gauge shows the model's 24-hour predicted probability
-                of an adverse outcome. Interpret alongside the contributing
-                factors and bedside assessment — the model informs, it does not
-                decide.
+                Шкала показывает вероятность неблагоприятного исхода в ближайшие
+                24 часа по оценке модели. Оценивайте её вместе с влияющими
+                факторами и осмотром пациента: модель подсказывает, но решение
+                принимает врач.
               </p>
             </div>
           </CardContent>
@@ -78,10 +81,10 @@ export function PatientCommandCenter() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Feature contributions (SHAP)</CardTitle>
+            <CardTitle>Вклад признаков (SHAP)</CardTitle>
             <CardDescription>
-              How each factor moves the prediction from baseline. Select a factor
-              for its clinical insight.
+              Как каждый фактор сдвигает прогноз относительно базового риска.
+              Выберите фактор, чтобы увидеть клиническую интерпретацию.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -99,24 +102,28 @@ export function PatientCommandCenter() {
         <Card className="xl:sticky xl:top-4">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle>Patient context</CardTitle>
+              <CardTitle>Данные пациента</CardTitle>
               <Badge variant="muted">{patient.id}</Badge>
             </div>
-            <CardDescription>Live bedside vitals</CardDescription>
+            <CardDescription>
+              Показатели с монитора в реальном времени
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="grid grid-cols-3 gap-2 text-center text-xs">
               <div className="rounded-md bg-muted/60 p-2">
-                <p className="text-muted-foreground">GA</p>
-                <p className="font-semibold">{patient.gestationalAgeWeeks} wks</p>
+                <p className="text-muted-foreground">Срок</p>
+                <p className="font-semibold">
+                  {patient.gestationalAgeWeeks} нед
+                </p>
               </div>
               <div className="rounded-md bg-muted/60 p-2">
-                <p className="text-muted-foreground">Weight</p>
-                <p className="font-semibold">{patient.birthWeightGrams} g</p>
+                <p className="text-muted-foreground">Масса</p>
+                <p className="font-semibold">{patient.birthWeightGrams} г</p>
               </div>
               <div className="rounded-md bg-muted/60 p-2">
-                <p className="text-muted-foreground">DOL</p>
-                <p className="font-semibold">{patient.dayOfLife}</p>
+                <p className="text-muted-foreground">Возраст</p>
+                <p className="font-semibold">{patient.dayOfLife} сут</p>
               </div>
             </div>
             <Separator />

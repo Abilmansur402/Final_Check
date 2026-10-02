@@ -33,7 +33,10 @@ function readStoredDoctor(): DoctorSession | null {
     const raw = window.localStorage.getItem(STORAGE_KEY)
     const doctor = raw ? (JSON.parse(raw) as DoctorSession) : null
     if (supabase && !doctor?.authUserId) return null
-    return doctor
+    if (!doctor) return null
+    // Refresh display fields (name, role, institution) from the current account list.
+    const account = findDoctorAccount(doctor.login, doctor.doctorId)
+    return account ? toDoctorSession(account, doctor.authUserId) : doctor
   } catch {
     return null
   }

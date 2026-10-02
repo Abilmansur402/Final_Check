@@ -19,7 +19,7 @@ interface DateRangePickerProps {
 
 export function DateRangePicker({ value, onChange }: DateRangePickerProps) {
   const fmt = (d: string) =>
-    new Date(d).toLocaleDateString('en-GB', {
+    new Date(d).toLocaleDateString('ru-RU', {
       day: '2-digit',
       month: 'short',
     })
@@ -34,7 +34,7 @@ export function DateRangePicker({ value, onChange }: DateRangePickerProps) {
       </PopoverTrigger>
       <PopoverContent align="start" className="w-64 space-y-3">
         <div className="space-y-1.5">
-          <Label htmlFor="from">From</Label>
+          <Label htmlFor="from">С</Label>
           <input
             id="from"
             type="date"
@@ -45,7 +45,7 @@ export function DateRangePicker({ value, onChange }: DateRangePickerProps) {
           />
         </div>
         <div className="space-y-1.5">
-          <Label htmlFor="to">To</Label>
+          <Label htmlFor="to">По</Label>
           <input
             id="to"
             type="date"

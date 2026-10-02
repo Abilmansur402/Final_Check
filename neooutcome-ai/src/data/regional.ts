@@ -1,6 +1,6 @@
 import type { RegionMetric, RegionTrendPoint } from '@/types'
 
-const SOURCE = 'AshyqData, official regional indicator'
+const SOURCE = 'Официальные данные AshyqData'
 
 export const DATA_YEAR = 2025
 

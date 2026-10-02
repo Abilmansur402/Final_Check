@@ -11,11 +11,41 @@ import { useAuth } from '@/auth/AuthProvider'
 import { cn } from '@/lib/utils'
 
 const NAV = [
-  { to: '/', label: 'Welcome', mobileLabel: 'Home', icon: LayoutDashboard, end: true },
-  { to: '/patient', label: 'Patient Command', mobileLabel: 'Patients', icon: Stethoscope, end: false },
-  { to: '/intake', label: 'Patient Intake', mobileLabel: 'Intake', icon: ClipboardPlus, end: false },
-  { to: '/regional', label: 'Regional Insight', mobileLabel: 'Regions', icon: Map, end: false },
-  { to: '/regional-map', label: 'Interactive Map', mobileLabel: 'Map', icon: MapPinned, end: false },
+  {
+    to: '/',
+    label: 'Главная',
+    mobileLabel: 'Главная',
+    icon: LayoutDashboard,
+    end: true,
+  },
+  {
+    to: '/patient',
+    label: 'Пациенты ОРИТН',
+    mobileLabel: 'Пациенты',
+    icon: Stethoscope,
+    end: false,
+  },
+  {
+    to: '/intake',
+    label: 'Приём пациента',
+    mobileLabel: 'Приём',
+    icon: ClipboardPlus,
+    end: false,
+  },
+  {
+    to: '/regional',
+    label: 'Регионы',
+    mobileLabel: 'Регионы',
+    icon: Map,
+    end: false,
+  },
+  {
+    to: '/regional-map',
+    label: 'Карта Казахстана',
+    mobileLabel: 'Карта',
+    icon: MapPinned,
+    end: false,
+  },
 ]
 
 export function SideRail() {
@@ -29,7 +59,9 @@ export function SideRail() {
         </div>
         <div className="leading-tight">
           <p className="text-sm font-semibold">NeoOutcome AI</p>
-          <p className="text-xs text-muted-foreground">NICU Decision Support</p>
+          <p className="text-xs text-muted-foreground">
+            Поддержка решений в ОРИТН
+          </p>
         </div>
       </div>
       <nav className="flex flex-1 flex-col gap-1 px-3 py-2">
@@ -54,10 +86,10 @@ export function SideRail() {
       </nav>
       <div className="border-t px-5 py-3 text-xs text-muted-foreground">
         <p className="font-medium text-foreground">
-          {doctor?.role ?? 'NICU clinician'}
+          {doctor?.role ?? 'Врач ОРИТН'}
         </p>
         <p className="line-clamp-2">
-          {doctor?.institution ?? 'Medical institution'}
+          {doctor?.institution ?? 'Медицинская организация'}
         </p>
       </div>
     </aside>

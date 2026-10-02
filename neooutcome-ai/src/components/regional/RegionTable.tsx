@@ -10,26 +10,22 @@ interface RegionTableProps {
 
 const integerFormatter = new Intl.NumberFormat('ru-KZ')
 
-export function RegionTable({
-  regions,
-  selected,
-  onSelect,
-}: RegionTableProps) {
+export function RegionTable({ regions, selected, onSelect }: RegionTableProps) {
   return (
     <div className="overflow-x-auto rounded-lg border">
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b bg-muted/50 text-left text-xs text-muted-foreground">
-            <th className="px-3 py-2 font-medium">Region</th>
+            <th className="px-3 py-2 font-medium">Регион</th>
             <th className="px-3 py-2 text-right font-medium">
-              Infant mortality
+              Младенческая смертность
             </th>
             <th className="px-3 py-2 text-right font-medium">
-              Neonatal mortality
+              Неонатальная смертность
             </th>
-            <th className="px-3 py-2 text-right font-medium">Beds</th>
+            <th className="px-3 py-2 text-right font-medium">Койки</th>
             <th className="px-3 py-2 text-right font-medium">
-              Nursing staff
+              Средний медперсонал
             </th>
           </tr>
         </thead>

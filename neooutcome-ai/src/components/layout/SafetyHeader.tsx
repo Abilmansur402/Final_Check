@@ -8,8 +8,10 @@ export function SafetyHeader() {
     >
       <ShieldCheck className="h-3.5 w-3.5 shrink-0" aria-hidden />
       <span>
-        NeoOutcome AI is a clinical decision-support prototype.{' '}
-        <span className="font-semibold">Clinical judgment takes priority.</span>
+        NeoOutcome AI — прототип системы поддержки клинических решений.{' '}
+        <span className="font-semibold">
+          Решение всегда остаётся за врачом.
+        </span>
       </span>
     </div>
   )

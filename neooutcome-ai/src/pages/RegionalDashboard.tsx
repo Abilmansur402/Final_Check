@@ -22,19 +22,16 @@ import {
 } from '@/components/ui/select'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { StatCard } from '@/components/dashboard/StatCard'
-import {
-  RegionalMap,
-  type MetricKey,
-} from '@/components/regional/RegionalMap'
+import { RegionalMap, type MetricKey } from '@/components/regional/RegionalMap'
 import { RegionMultiSelect } from '@/components/regional/RegionMultiSelect'
 import { RegionTable } from '@/components/regional/RegionTable'
 import { RegionalTrendChart } from '@/components/regional/RegionalTrendChart'
 
 const METRIC_OPTIONS: { value: MetricKey; label: string }[] = [
-  { value: 'infantMortalityPer1000', label: 'Infant mortality' },
-  { value: 'neonatalMortalityPer1000', label: 'Neonatal mortality' },
-  { value: 'hospitalBeds', label: 'Hospital beds' },
-  { value: 'nursingStaff', label: 'Nursing staff' },
+  { value: 'infantMortalityPer1000', label: 'Младенческая смертность' },
+  { value: 'neonatalMortalityPer1000', label: 'Неонатальная смертность' },
+  { value: 'hospitalBeds', label: 'Больничные койки' },
+  { value: 'nursingStaff', label: 'Средний медперсонал' },
 ]
 
 const ALL_REGIONS = REGIONS.map((region) => region.region)
@@ -45,8 +42,9 @@ function average(values: number[]) {
 }
 
 export function RegionalDashboard() {
-  const [metric, setMetric] =
-    React.useState<MetricKey>('infantMortalityPer1000')
+  const [metric, setMetric] = React.useState<MetricKey>(
+    'infantMortalityPer1000',
+  )
   const [regionFilter, setRegionFilter] = React.useState<string[]>([])
   const [selected, setSelected] = React.useState<string>('Кызылординская')
   const [showComparison, setShowComparison] = React.useState(true)
@@ -115,46 +113,46 @@ export function RegionalDashboard() {
       <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard
           icon={Baby}
-          label="Avg infant mortality"
+          label="Младенческая смертность (среднее)"
           value={`${avgInfantMortality.toFixed(2)}‰`}
-          hint={`Kazakhstan: ${NATIONAL_2025.infantMortalityPer1000.toFixed(2)}‰`}
+          hint={`По Казахстану: ${NATIONAL_2025.infantMortalityPer1000.toFixed(2)}‰`}
           accentClass="text-risk-high bg-risk-high/10"
         />
         <StatCard
           icon={HeartPulse}
-          label="Avg neonatal mortality"
+          label="Неонатальная смертность (среднее)"
           value={`${avgNeonatalMortality.toFixed(2)}‰`}
-          hint={`Kazakhstan: ${NATIONAL_2025.neonatalMortalityPer1000.toFixed(2)}‰`}
+          hint={`По Казахстану: ${NATIONAL_2025.neonatalMortalityPer1000.toFixed(2)}‰`}
           accentClass="text-risk-elevated bg-risk-elevated/10"
         />
         <StatCard
           icon={BedDouble}
-          label="Hospital beds"
+          label="Больничные койки"
           value={integerFormatter.format(totalBeds)}
-          hint="Selected regions"
+          hint="В выбранных регионах"
         />
         <StatCard
           icon={UsersRound}
-          label="Nursing staff"
+          label="Средний медперсонал"
           value={integerFormatter.format(totalNursingStaff)}
-          hint={`${hotspotCount} infant mortality hotspots`}
+          hint={`Регионов выше среднего по смертности: ${hotspotCount}`}
           accentClass="text-primary bg-primary/10"
         />
       </section>
 
       <Card>
         <CardHeader>
-          <CardTitle>Kazakhstan child health map</CardTitle>
+          <CardTitle>Карта детского здоровья Казахстана</CardTitle>
           <CardDescription>
-            Regional public-health layer: mortality indicators per 1000 live
-            births plus healthcare capacity indicators.
+            Показатели смертности на 1000 живорождённых и ресурсы
+            здравоохранения по регионам.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="map">
             <TabsList>
-              <TabsTrigger value="map">Map</TabsTrigger>
-              <TabsTrigger value="table">Table</TabsTrigger>
+              <TabsTrigger value="map">Карта</TabsTrigger>
+              <TabsTrigger value="table">Таблица</TabsTrigger>
             </TabsList>
             <TabsContent value="map">
               <RegionalMap
@@ -178,9 +176,9 @@ export function RegionalDashboard() {
       <Card>
         <CardHeader className="flex-row items-start justify-between space-y-0">
           <div>
-            <CardTitle>Mortality trend — {selectedRegion.region}</CardTitle>
+            <CardTitle>Динамика смертности — {selectedRegion.region}</CardTitle>
             <CardDescription>
-              Infant and neonatal mortality, 2020–2025.
+              Младенческая и неонатальная смертность, 2020–2025.
             </CardDescription>
           </div>
           <Tabs
@@ -188,8 +186,8 @@ export function RegionalDashboard() {
             onValueChange={(value) => setShowComparison(value === 'compare')}
           >
             <TabsList>
-              <TabsTrigger value="region">Region</TabsTrigger>
-              <TabsTrigger value="compare">vs Kazakhstan</TabsTrigger>
+              <TabsTrigger value="region">Регион</TabsTrigger>
+              <TabsTrigger value="compare">Сравнить с РК</TabsTrigger>
             </TabsList>
           </Tabs>
         </CardHeader>
@@ -205,25 +203,30 @@ export function RegionalDashboard() {
 
       <Card>
         <CardHeader>
-          <CardTitle>How this connects to the ML layer</CardTitle>
+          <CardTitle>Как это связано с ML-моделью</CardTitle>
           <CardDescription>
-            The regional layer is population-level monitoring. The patient
-            command center uses the NeoOutcome ML feature mart for individual
-            risk scoring.
+            Региональный слой — это мониторинг на уровне населения. Карточки
+            пациентов используют ML-модели NeoOutcome для индивидуальной оценки
+            риска.
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-3 text-sm text-muted-foreground md:grid-cols-3">
           <div className="rounded-lg border bg-background p-3">
-            <p className="font-medium text-foreground">PICDB / ML</p>
-            <p>Patient-level model training and individual NICU risk scores.</p>
+            <p className="font-medium text-foreground">
+              PICDB и Асфендиярова / ML
+            </p>
+            <p>
+              Обучение моделей на данных пациентов и индивидуальный риск в
+              ОРИТН.
+            </p>
           </div>
           <div className="rounded-lg border bg-background p-3">
-            <p className="font-medium text-foreground">AshyqData / map</p>
-            <p>Regional mortality and capacity indicators for Kazakhstan.</p>
+            <p className="font-medium text-foreground">AshyqData / карта</p>
+            <p>Региональные показатели смертности и ресурсов Казахстана.</p>
           </div>
           <div className="rounded-lg border bg-background p-3">
-            <p className="font-medium text-foreground">Hospital workflow</p>
-            <p>Doctors enter through authentication before using dashboards.</p>
+            <p className="font-medium text-foreground">Работа в больнице</p>
+            <p>Врачи входят в систему по учётной записи.</p>
           </div>
         </CardContent>
       </Card>

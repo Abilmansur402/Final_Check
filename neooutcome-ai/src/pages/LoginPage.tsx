@@ -83,7 +83,7 @@ export function LoginPage() {
             <div>
               <p className="text-sm font-semibold">NeoOutcome AI</p>
               <p className="text-xs text-muted-foreground">
-                Clinical decision support workspace
+                Поддержка клинических решений
               </p>
             </div>
           </div>
@@ -91,7 +91,7 @@ export function LoginPage() {
           <div className="my-10 max-w-xl">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
               <ShieldCheck className="h-3.5 w-3.5 text-primary" />
-              Access for authorized medical staff
+              Доступ только для медицинского персонала
             </div>
             <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
               Вход в рабочее пространство врача
@@ -110,11 +110,11 @@ export function LoginPage() {
             </div>
             <div className="rounded-lg border bg-background p-3">
               <User className="mb-2 h-4 w-4 text-primary" />
-              Врачи NICU
+              Врачи ОРИТН
             </div>
             <div className="rounded-lg border bg-background p-3">
               <ShieldCheck className="mb-2 h-4 w-4 text-primary" />
-              Protected demo
+              Защищённый демо-доступ
             </div>
           </div>
         </div>
@@ -195,7 +195,7 @@ export function LoginPage() {
               </form>
 
               <div className="mt-5 rounded-md bg-muted p-3 text-xs text-muted-foreground">
-                Demo: <span className="font-medium">{DEMO_LOGIN}</span> /{' '}
+                Демо-вход: <span className="font-medium">{DEMO_LOGIN}</span> /{' '}
                 <span className="font-medium">{DEMO_ID}</span> /{' '}
                 <span className="font-medium">{DEMO_PASSWORD}</span>
               </div>

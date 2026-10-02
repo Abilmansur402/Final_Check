@@ -51,20 +51,19 @@ export function SHAPWaterfall({
   )
   const scale = (v: number) => `${(v / domainMax) * 100}%`
 
-  const active =
-    features.find((f) => f.feature === selected) ?? features[0]
+  const active = features.find((f) => f.feature === selected) ?? features[0]
 
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between text-xs text-muted-foreground">
         <span>
-          Baseline{' '}
+          Базовый риск{' '}
           <span className="font-semibold tabular-nums text-foreground">
             {Math.round(baseline)}%
           </span>
         </span>
         <span>
-          Prediction{' '}
+          Прогноз{' '}
           <span className="font-semibold tabular-nums text-foreground">
             {Math.round(finalScore)}%
           </span>
@@ -83,7 +82,9 @@ export function SHAPWaterfall({
               onClick={() => setSelected(feature.feature)}
               className={cn(
                 'group grid w-full grid-cols-[130px_1fr_54px] items-center gap-3 rounded-md px-2 py-1.5 text-left transition-colors',
-                isSelected ? 'bg-accent/60 ring-1 ring-primary/30' : 'hover:bg-muted',
+                isSelected
+                  ? 'bg-accent/60 ring-1 ring-primary/30'
+                  : 'hover:bg-muted',
               )}
             >
               <span className="truncate text-xs font-medium">
@@ -116,11 +117,11 @@ export function SHAPWaterfall({
         <div className="rounded-lg border border-primary/20 bg-accent/40 p-4">
           <div className="mb-1 flex items-center gap-2 text-sm font-semibold text-accent-foreground">
             <Lightbulb className="h-4 w-4" />
-            Clinical Insight — {active.label}
+            Клиническая интерпретация — {active.label}
           </div>
           <p className="text-sm text-foreground/90">{active.insight}</p>
           <div className="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground">
-            Current value
+            Текущее значение
             <ArrowRight className="h-3 w-3" />
             <span className="font-medium text-foreground">{active.value}</span>
           </div>

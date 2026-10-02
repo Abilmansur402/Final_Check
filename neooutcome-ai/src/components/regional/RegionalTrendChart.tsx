@@ -62,7 +62,10 @@ export function RegionalTrendChart({
             unit="‰"
           />
           <Tooltip
-            formatter={(value: number) => [`${value.toFixed(2)}‰`, '']}
+            formatter={(value: number, name: string) => [
+              `${value.toFixed(2)}‰`,
+              name,
+            ]}
             contentStyle={{
               background: 'hsl(var(--popover))',
               border: '1px solid hsl(var(--border))',
@@ -74,7 +77,7 @@ export function RegionalTrendChart({
           <Area
             type="monotone"
             dataKey="infantMortalityPer1000"
-            name={`${regionLabel}: infant`}
+            name={`${regionLabel}: младенческая`}
             stroke="hsl(var(--primary))"
             strokeWidth={2}
             fill="url(#infantFill)"
@@ -82,7 +85,7 @@ export function RegionalTrendChart({
           <Line
             type="monotone"
             dataKey="neonatalMortalityPer1000"
-            name={`${regionLabel}: neonatal`}
+            name={`${regionLabel}: неонатальная`}
             stroke="hsl(var(--risk-elevated))"
             strokeWidth={2}
             dot={{ r: 3 }}
@@ -91,7 +94,7 @@ export function RegionalTrendChart({
             <Line
               type="monotone"
               dataKey="nationalInfantAvg"
-              name="Kazakhstan infant avg, 2025"
+              name="Казахстан, младенческая (среднее за 2025)"
               stroke="hsl(var(--risk-high))"
               strokeWidth={2}
               strokeDasharray="5 4"

@@ -3,13 +3,13 @@ import {
   RadialBarChart,
   PolarAngleAxis,
   ResponsiveContainer,
-} from "recharts";
-import { getRiskDescriptor } from "@/lib/risk";
-import { cn } from "@/lib/utils";
+} from 'recharts'
+import { getRiskDescriptor } from '@/lib/risk'
+import { cn } from '@/lib/utils'
 
 interface RiskGaugeProps {
-  score: number;
-  baseline?: number;
+  score: number
+  baseline?: number
 }
 
 /**
@@ -17,8 +17,8 @@ interface RiskGaugeProps {
  * percentage on a soft, non-alarming gauge.
  */
 export function RiskGauge({ score, baseline }: RiskGaugeProps) {
-  const d = getRiskDescriptor(score);
-  const data = [{ name: "risk", value: score, fill: d.colorVar }];
+  const d = getRiskDescriptor(score)
+  const data = [{ name: 'risk', value: score, fill: d.colorVar }]
 
   return (
     <div className="mx-auto flex w-full max-w-[240px] flex-col items-center">
@@ -39,7 +39,7 @@ export function RiskGauge({ score, baseline }: RiskGaugeProps) {
               tick={false}
             />
             <RadialBar
-              background={{ fill: "hsl(var(--muted))" }}
+              background={{ fill: 'hsl(var(--muted))' }}
               dataKey="value"
               cornerRadius={12}
               angleAxisId={0}
@@ -49,7 +49,7 @@ export function RiskGauge({ score, baseline }: RiskGaugeProps) {
         <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
           <span
             className={cn(
-              "flex items-baseline text-5xl font-bold leading-none tabular-nums",
+              'flex items-baseline text-5xl font-bold leading-none tabular-nums',
               d.textClass,
             )}
           >
@@ -58,24 +58,24 @@ export function RiskGauge({ score, baseline }: RiskGaugeProps) {
           </span>
           <span
             className={cn(
-              "mt-2 whitespace-nowrap text-sm font-semibold uppercase leading-none",
+              'mt-2 whitespace-nowrap text-sm font-semibold uppercase leading-none',
               d.textClass,
             )}
           >
-            {d.label} risk
+            {d.label} риск
           </span>
         </div>
       </div>
       <div className="-mt-6 flex flex-col items-center gap-0.5 text-center">
         <span className="text-xs text-muted-foreground">
-          24h adverse-outcome probability
+          Вероятность неблагоприятного исхода за 24 ч
         </span>
         {baseline !== undefined && (
           <span className="text-[11px] tabular-nums text-muted-foreground">
-            Model baseline {Math.round(baseline)}%
+            Базовый риск модели {Math.round(baseline)}%
           </span>
         )}
       </div>
     </div>
-  );
+  )
 }

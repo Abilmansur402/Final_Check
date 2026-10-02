@@ -72,7 +72,7 @@ export function KazakhstanChoropleth({
 
     fetch('/data/kazakhstan-admin1.geojson')
       .then((response) => {
-        if (!response.ok) throw new Error('Map data is unavailable')
+        if (!response.ok) throw new Error('Данные карты недоступны')
         return response.json() as Promise<MapData>
       })
       .then((data) => {

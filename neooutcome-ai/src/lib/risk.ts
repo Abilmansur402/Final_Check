@@ -19,7 +19,7 @@ export function getRiskBand(score: number): RiskBand {
 const DESCRIPTORS: Record<RiskBand, RiskDescriptor> = {
   low: {
     band: 'low',
-    label: 'Low',
+    label: 'Низкий',
     colorVar: 'hsl(var(--risk-low))',
     textClass: 'text-risk-low',
     bgClass: 'bg-risk-low/12',
@@ -27,7 +27,7 @@ const DESCRIPTORS: Record<RiskBand, RiskDescriptor> = {
   },
   moderate: {
     band: 'moderate',
-    label: 'Moderate',
+    label: 'Умеренный',
     colorVar: 'hsl(var(--risk-moderate))',
     textClass: 'text-risk-moderate',
     bgClass: 'bg-risk-moderate/12',
@@ -35,7 +35,7 @@ const DESCRIPTORS: Record<RiskBand, RiskDescriptor> = {
   },
   elevated: {
     band: 'elevated',
-    label: 'Elevated',
+    label: 'Повышенный',
     colorVar: 'hsl(var(--risk-elevated))',
     textClass: 'text-risk-elevated',
     bgClass: 'bg-risk-elevated/12',
@@ -43,7 +43,7 @@ const DESCRIPTORS: Record<RiskBand, RiskDescriptor> = {
   },
   high: {
     band: 'high',
-    label: 'High',
+    label: 'Высокий',
     colorVar: 'hsl(var(--risk-high))',
     textClass: 'text-risk-high',
     bgClass: 'bg-risk-high/12',

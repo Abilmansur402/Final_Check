@@ -158,7 +158,7 @@ function importedBundle(features: FeatureRecord): PatientBundle {
     encounter: {
       encounter_id: `IMPORT-HADM-${now.getTime().toString().slice(-6)}`,
       institution: 'Текущее медицинское учреждение',
-      department: 'NICU',
+      department: 'ОРИТН',
       admitted_at: now.toISOString(),
       prediction_time: predictionTime.toISOString(),
       admission_diagnosis: 'Импорт из машинного файла',

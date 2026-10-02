@@ -23,9 +23,9 @@ import { useToast } from '@/components/ui/toast'
 import { enqueueReviewTask } from '@/lib/reviewQueue'
 
 const PRIORITIES = [
-  { value: 'routine', label: 'Routine — next round' },
-  { value: 'urgent', label: 'Urgent — within 1 hour' },
-  { value: 'immediate', label: 'Immediate — attending now' },
+  { value: 'routine', label: 'Плановый — при следующем обходе' },
+  { value: 'urgent', label: 'Срочный — в течение часа' },
+  { value: 'immediate', label: 'Немедленный — лечащий врач сейчас' },
 ]
 
 export function FlagForReview({ patient }: { patient: Patient }) {
@@ -45,8 +45,8 @@ export function FlagForReview({ patient }: { patient: Patient }) {
         riskScore: patient.riskScore,
       })
       toast({
-        title: 'Flagged for clinical review',
-        description: `${patient.id} added to review queue (#${task.ticketId}, ${priority}).`,
+        title: 'Отправлено на врачебную проверку',
+        description: `${patient.id} добавлен в очередь проверки (№${task.ticketId}, ${PRIORITIES.find((p) => p.value === priority)?.label ?? priority}).`,
         variant: 'success',
       })
       setOpen(false)
@@ -61,20 +61,22 @@ export function FlagForReview({ patient }: { patient: Patient }) {
       <DialogTrigger asChild>
         <Button variant="outline" className="gap-2">
           <Flag className="h-4 w-4" />
-          Flag for Review
+          На проверку
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Flag {patient.name} for review</DialogTitle>
+          <DialogTitle>
+            Отправить пациента {patient.name} на проверку
+          </DialogTitle>
           <DialogDescription>
-            This adds a task to the clinical review queue. It does not replace
-            direct escalation for emergencies.
+            Задача будет добавлена в очередь врачебной проверки. Это не заменяет
+            немедленный вызов врача в экстренной ситуации.
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-4 py-2">
           <div className="space-y-1.5">
-            <Label htmlFor="priority">Priority</Label>
+            <Label htmlFor="priority">Приоритет</Label>
             <Select value={priority} onValueChange={setPriority}>
               <SelectTrigger id="priority">
                 <SelectValue />
@@ -89,13 +91,13 @@ export function FlagForReview({ patient }: { patient: Patient }) {
             </Select>
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="note">Clinical note (optional)</Label>
+            <Label htmlFor="note">Клиническая заметка (необязательно)</Label>
             <textarea
               id="note"
               value={note}
               onChange={(e) => setNote(e.target.value)}
               rows={3}
-              placeholder="e.g. Rising FiO₂ and recurrent apnea over last 6h."
+              placeholder="Например: рост FiO₂ и повторные апноэ за последние 6 ч."
               className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             />
           </div>
@@ -106,11 +108,11 @@ export function FlagForReview({ patient }: { patient: Patient }) {
             onClick={() => setOpen(false)}
             disabled={submitting}
           >
-            Cancel
+            Отмена
           </Button>
           <Button onClick={submit} disabled={submitting} className="gap-2">
             {submitting && <Loader2 className="h-4 w-4 animate-spin" />}
-            Add to review queue
+            Добавить в очередь
           </Button>
         </DialogFooter>
       </DialogContent>

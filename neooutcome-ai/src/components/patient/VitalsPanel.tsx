@@ -43,9 +43,9 @@ export function VitalsPanel({ patient }: { patient: Patient }) {
       <div className="grid gap-2">
         <VitalRow
           icon={Heart}
-          label="Heart rate"
+          label="ЧСС"
           value={String(v.heartRate)}
-          unit="bpm"
+          unit="уд/мин"
           ok={v.heartRate >= 100 && v.heartRate <= 180}
         />
         <VitalRow
@@ -57,30 +57,30 @@ export function VitalsPanel({ patient }: { patient: Patient }) {
         />
         <VitalRow
           icon={Thermometer}
-          label="Temperature"
+          label="Температура"
           value={v.temperature.toFixed(1)}
           unit="°C"
           ok={v.temperature >= 36.3 && v.temperature <= 37.2}
         />
         <VitalRow
           icon={Activity}
-          label="Respiratory rate"
+          label="ЧДД"
           value={String(v.respiratoryRate)}
-          unit="/min"
+          unit="в мин"
           ok={v.respiratoryRate >= 30 && v.respiratoryRate <= 60}
         />
         <VitalRow
           icon={Gauge}
-          label="Mean art. pressure"
+          label="Среднее АД"
           value={String(v.meanBloodPressure)}
-          unit="mmHg"
+          unit="мм рт. ст."
           ok={v.meanBloodPressure >= 30}
         />
       </div>
 
       <div className="rounded-md border bg-background p-3">
         <p className="mb-1 text-xs font-medium text-muted-foreground">
-          Heart rate · last 60 min
+          ЧСС за последние 60 мин
         </p>
         <div className="h-16">
           <ResponsiveContainer width="100%" height="100%">

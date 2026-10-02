@@ -13,17 +13,19 @@ export function StreamStatus() {
           ? 'border-risk-low/40 bg-risk-low/10 text-risk-low'
           : 'border-border bg-muted text-muted-foreground',
       )}
-      title={streaming ? 'Live bedside stream active' : 'Stream paused'}
+      title={
+        streaming ? 'Поток данных с инкубаторов активен' : 'Поток приостановлен'
+      }
     >
       {streaming ? (
         <>
           <Radio className="h-3.5 w-3.5 animate-pulse-soft" />
-          Live stream
+          Данные в реальном времени
         </>
       ) : (
         <>
           <PauseCircle className="h-3.5 w-3.5" />
-          Stream paused
+          Поток на паузе
         </>
       )}
     </button>
