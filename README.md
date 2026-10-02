@@ -68,6 +68,36 @@ git push -u origin main
 
 ## Deployment and domain
 
+### VPS deployment for `winnie.govtech-kz.com`
+
+Use this route when the domain is already wired to the provided VPS and the panel expects the app on port `8023`.
+
+```bash
+ssh user@SERVER_IP
+git clone https://github.com/YOUR-USER/YOUR-REPO.git
+cd YOUR-REPO
+docker compose up -d --build
+```
+
+The compose stack exposes only the frontend on port `8023`. The Python model API stays private inside the Docker network as `http://api:8000`, and nginx proxies browser requests from `/api/*` to that service.
+
+Check it on the server:
+
+```bash
+curl http://localhost:8023
+curl http://localhost:8023/api/health
+```
+
+Then open:
+
+```text
+https://winnie.govtech-kz.com
+```
+
+Do not commit the VPS, SSH, S3, or other infrastructure credentials from `Winnie.pdf`. Keep them only in the deployment environment, and rotate them if they were shared publicly.
+
+### Vercel deployment
+
 Recommended setup:
 
 1. Push this repository to GitHub.
@@ -93,4 +123,3 @@ For a custom domain in Vercel:
 5. Wait for DNS verification and HTTPS certificate provisioning.
 
 Deploy the Python ML API separately on a private backend service. Do not expose real patient inference endpoints publicly without authentication, authorization, audit logging, encryption, and institutional approval.
-
