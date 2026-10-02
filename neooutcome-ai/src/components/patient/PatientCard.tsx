@@ -35,11 +35,11 @@ export function PatientCard({
   const body = (
     <div
       className={cn(
-        'flex items-center gap-3 rounded-lg border bg-card p-3 text-left transition-all hover:border-primary/40 hover:shadow-sm',
+        'grid grid-cols-[40px_minmax(0,1fr)] gap-3 rounded-lg border bg-card p-3 text-left transition-all hover:border-primary/40 hover:shadow-sm sm:grid-cols-[40px_minmax(0,1fr)_auto]',
         selected && 'border-primary/60 ring-1 ring-primary/30',
       )}
     >
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center self-center rounded-full bg-accent text-accent-foreground">
         <Baby className="h-5 w-5" />
       </div>
       <div className="min-w-0 flex-1">
@@ -55,13 +55,18 @@ export function PatientCard({
         <p className="truncate text-xs text-muted-foreground">
           {patient.id} · {patient.bed}
         </p>
-        <p className="text-xs text-muted-foreground">
-          {patient.gestationalAgeWeeks} wks · {patient.birthWeightGrams} g · DOL{' '}
-          {patient.dayOfLife}
+        <p className="mt-1 flex flex-wrap gap-x-2 gap-y-1 text-xs text-muted-foreground">
+          <span className="whitespace-nowrap tabular-nums">{patient.gestationalAgeWeeks} wks</span>
+          <span aria-hidden="true">·</span>
+          <span className="whitespace-nowrap tabular-nums">{patient.birthWeightGrams} g</span>
+          <span aria-hidden="true">·</span>
+          <span className="whitespace-nowrap tabular-nums">DOL {patient.dayOfLife}</span>
         </p>
       </div>
-      <RiskIndicator score={patient.riskScore} delta={patient.riskDelta} size="sm" />
-      {href && <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />}
+      <div className="col-span-2 flex items-center justify-end gap-2 sm:col-span-1 sm:self-center">
+        <RiskIndicator score={patient.riskScore} delta={patient.riskDelta} size="sm" />
+        {href && <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />}
+      </div>
     </div>
   )
 

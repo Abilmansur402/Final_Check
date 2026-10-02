@@ -4,6 +4,7 @@ import {
   AlertTriangle,
   CalendarPlus,
   CheckCircle2,
+  Database,
   Download,
   FileJson,
   FileSpreadsheet,
@@ -326,68 +327,100 @@ export function PatientIntakePage() {
       </section>
 
       <section className="grid gap-4 lg:grid-cols-[360px_minmax(0,1fr)]">
-        <div className="rounded-md border bg-card p-4">
-          <h3 className="text-sm font-semibold">Источник данных</h3>
-          <p className="mt-1 text-xs text-muted-foreground">
-            CSV/JSON передают признаки модели. PDF используется как врачебное представление.
-          </p>
+        <div className="space-y-4">
+          <div className="rounded-md border bg-card p-4">
+            <h3 className="text-sm font-semibold">Источник данных</h3>
+            <p className="mt-1 text-xs text-muted-foreground">
+              CSV/JSON передают признаки модели. PDF используется как врачебное представление.
+            </p>
 
-          <input
-            ref={inputRef}
-            type="file"
-            accept=".csv,.json,.pdf,text/csv,application/json,application/pdf"
-            className="hidden"
-            onChange={handleFile}
-          />
-          <button
-            type="button"
-            onClick={() => inputRef.current?.click()}
-            className="mt-4 flex min-h-36 w-full flex-col items-center justify-center rounded-md border border-dashed bg-background px-4 text-center transition-colors hover:border-primary hover:bg-primary/5"
-          >
-            <Upload className="h-6 w-6 text-primary" />
-            <span className="mt-2 text-sm font-medium">Загрузить файл пациента</span>
-            <span className="mt-1 text-xs text-muted-foreground">CSV, JSON или PDF</span>
-          </button>
+            <input
+              ref={inputRef}
+              type="file"
+              accept=".csv,.json,.pdf,text/csv,application/json,application/pdf"
+              className="hidden"
+              onChange={handleFile}
+            />
+            <button
+              type="button"
+              onClick={() => inputRef.current?.click()}
+              className="mt-4 flex min-h-36 w-full flex-col items-center justify-center rounded-md border border-dashed bg-background px-4 text-center transition-colors hover:border-primary hover:bg-primary/5"
+            >
+              <Upload className="h-6 w-6 text-primary" />
+              <span className="mt-2 text-sm font-medium">Загрузить файл пациента</span>
+              <span className="mt-1 text-xs text-muted-foreground">CSV, JSON или PDF</span>
+            </button>
 
-          <Button
-            type="button"
-            variant="outline"
-            className="mt-3 w-full"
-            onClick={loadDemo}
-            disabled={isLoadingDemo}
-          >
-            {isLoadingDemo ? <Loader2 className="animate-spin" /> : <Activity />}
-            Загрузить демо-пациента
-          </Button>
+            <Button
+              type="button"
+              variant="outline"
+              className="mt-3 w-full"
+              onClick={loadDemo}
+              disabled={isLoadingDemo}
+            >
+              {isLoadingDemo ? <Loader2 className="animate-spin" /> : <Activity />}
+              Загрузить демо-пациента
+            </Button>
 
-          {loadedFile && (
-            <div className="mt-4 rounded-md border bg-muted/40 p-3 text-xs">
-              <p className="font-medium text-foreground">Загружено</p>
-              <p className="mt-1 break-words text-muted-foreground">{loadedFile}</p>
+            {loadedFile && (
+              <div className="mt-4 rounded-md border bg-muted/40 p-3 text-xs">
+                <p className="font-medium text-foreground">Загружено</p>
+                <p className="mt-1 break-words text-muted-foreground">{loadedFile}</p>
+              </div>
+            )}
+
+            <div className="mt-4 grid grid-cols-3 gap-2">
+              <a
+                href={`${DEMO_BASE}_features.csv`}
+                className="flex flex-col items-center gap-1 rounded-md border px-2 py-2 text-center text-[11px] hover:bg-muted"
+              >
+                <FileSpreadsheet className="h-4 w-4 text-primary" /> CSV
+              </a>
+              <a
+                href={`${DEMO_BASE}_bundle.json`}
+                className="flex flex-col items-center gap-1 rounded-md border px-2 py-2 text-center text-[11px] hover:bg-muted"
+              >
+                <FileJson className="h-4 w-4 text-primary" /> JSON
+              </a>
+              <a
+                href={`${DEMO_BASE}_patient_card.pdf`}
+                target="_blank"
+                rel="noreferrer"
+                className="flex flex-col items-center gap-1 rounded-md border px-2 py-2 text-center text-[11px] hover:bg-muted"
+              >
+                <FileText className="h-4 w-4 text-primary" /> PDF
+              </a>
             </div>
-          )}
+          </div>
 
-          <div className="mt-4 grid grid-cols-3 gap-2">
-            <a
-              href={`${DEMO_BASE}_features.csv`}
-              className="flex flex-col items-center gap-1 rounded-md border px-2 py-2 text-center text-[11px] hover:bg-muted"
-            >
-              <FileSpreadsheet className="h-4 w-4 text-primary" /> CSV
-            </a>
-            <a
-              href={`${DEMO_BASE}_bundle.json`}
-              className="flex flex-col items-center gap-1 rounded-md border px-2 py-2 text-center text-[11px] hover:bg-muted"
-            >
-              <FileJson className="h-4 w-4 text-primary" /> JSON
-            </a>
-            <a
-              href={`${DEMO_BASE}_patient_card.pdf`}
-              target="_blank"
-              rel="noreferrer"
-              className="flex flex-col items-center gap-1 rounded-md border px-2 py-2 text-center text-[11px] hover:bg-muted"
-            >
-              <FileText className="h-4 w-4 text-primary" /> PDF
-            </a>
+          <div className="rounded-md border bg-card p-4">
+            <div className="flex items-start gap-3">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
+                <Database className="h-4 w-4" />
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-sm font-semibold">Asfendiyarov University dataset</h3>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                  Обезличенный исследовательский набор клинических числовых признаков,
+                  предоставленный для хакатона. Используется для демонстрации агрегированного
+                  анализа и ML-пайплайна.
+                </p>
+              </div>
+            </div>
+            <dl className="mt-4 grid grid-cols-3 gap-2 text-center text-xs">
+              <div className="rounded-md bg-muted/50 px-2 py-2">
+                <dt className="text-muted-foreground">Rows</dt>
+                <dd className="mt-1 font-semibold tabular-nums">1,105</dd>
+              </div>
+              <div className="rounded-md bg-muted/50 px-2 py-2">
+                <dt className="text-muted-foreground">Features</dt>
+                <dd className="mt-1 font-semibold tabular-nums">26</dd>
+              </div>
+              <div className="rounded-md bg-muted/50 px-2 py-2">
+                <dt className="text-muted-foreground">IDs</dt>
+                <dd className="mt-1 font-semibold">Removed</dd>
+              </div>
+            </dl>
           </div>
         </div>
 
